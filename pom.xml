@@ -35,7 +35,6 @@
         </dependency>
 
 
-
     </dependencies>
     <build>
         <plugins>
@@ -61,17 +60,13 @@
                     <argLine>-Xmx1024m -XX:MaxPermSize=512m</argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testrunners/testng_regressions.xml</suiteXmlFile>
-<!--                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
 
                     </suiteXmlFiles>
 
 
-
                 </configuration>
             </plugin>
-
-
-
 
 
         </plugins>
