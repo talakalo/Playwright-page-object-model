@@ -1,14 +1,15 @@
 package pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class LoginPage {
     private Page page;
-    private String emailId = "#input-email";
-    private String passwordId = "#input-password";
-    private String forgotPwdLink = "a:text('Forgotten Password11')";
-    private String loginBtn = "input[value='Login']";
-    private String logoutLink = "//a[@class='list-group-item'][normalize-space()='Logout']";
+    private Locator emailId = page.locator("#input-email");
+    private Locator passwordId =page.locator( "#input-password");
+    private Locator forgotPwdLink =page.locator( "a:text('Forgotten Password11')");
+    private Locator loginBtn = page.locator("input[value='Login']");
+    private Locator logoutLink = page.locator("//a[@class='list-group-item'][normalize-space()='Logout']");
 
     public LoginPage(Page page) {
         this.page = page;
@@ -19,17 +20,17 @@ public class LoginPage {
     }
 
     public boolean isForgotPwdLinkExist() {
-        return page.isVisible(forgotPwdLink);
+        return forgotPwdLink.isVisible();
     }
 
     public boolean doLogin(String userName, String password) {
 
         System.out.printf("App creds: " + userName + ": " + password);
-        page.fill(emailId, userName);
-        page.fill(passwordId, password);
-        page.click(loginBtn);
+        this.emailId.fill(userName);
+        this.passwordId.fill(password);
+        this.loginBtn.click();
 
-        if (page.isVisible(logoutLink)) {
+        if (logoutLink.isVisible()) {
             System.out.println("user is logged in successfully");
             return true;
         }
