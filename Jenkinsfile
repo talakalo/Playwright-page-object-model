@@ -35,7 +35,11 @@ ipeline
 
        stage("Sanity Automation Test"){
             steps{
-                echo("Sanity Automation Test")
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/talakalo/Playwright-page-object-model'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml"
+
+                               }
             }
         }
 
@@ -43,7 +47,7 @@ ipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/talakalo/Playwright-page-object-model'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regressions.xml"
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regresssion.xml"
 
                 }
             }
